@@ -4,7 +4,7 @@ public class Prueba{
 		char ans = 'n';
 		char adminAns = 'n';
 		String contrasena = "nati";
-		
+		Admin adan = new Admin();
 		boolean adminKey = false;
 		boolean userKey = false;
 		do{
@@ -23,22 +23,25 @@ public class Prueba{
 				while(adminKey){
 					//usar programa
 					//crear admin
-					Admin adan = new Admin();
+					
 					System.out.println("Que desea realizar? Escriba el numero de la opcion");
-					System.out.println("1. Añadir cartera al inventario");
-					System.out.println("2. Añadir reloj al inventario");
-					System.out.println("3. Añadir gorra al inventario");
-					System.out.println("4. Añadir pulsera al inventario");
+					System.out.println("1. Anadir cartera al inventario");
+					System.out.println("2. Anadir reloj al inventario");
+					System.out.println("3. Anadir gorra al inventario");
+					System.out.println("4. Anadir pulsera al inventario");
 					System.out.println("5. Describir venta de articulo");
 					System.out.println("6. Visualizar inventario");
-					System.out.println("7. Salir del modo admin");
-					System.out.println("8. Salir del programa");
+					System.out.println("7. Visualizar estadisticas");
+					System.out.println("8. Salir del modo admin");
+					System.out.println("9. Salir del programa");
 					int i = leer.nextInt();
 					LlamarMetodosAdmin(adan,i);
-					if(i == 7)
-						adminKey = false;
 					if(i == 8)
+						adminKey = false;
+					if(i == 9){
+						adan.DesplegarInventario();
 						return;
+					}
 
 				}
 				System.out.println("¿Desea intertarlo de nuevo?");
@@ -66,11 +69,16 @@ public class Prueba{
 
 		}while(ans == 's');
 	}
-
+	/** Metodo para llamar a metodos de la clase user segun lo que solicite el usuario en el menu
+	 * @param admin Administrador del programa
+	 * @param index Entero para identificar la opcion que solicita el administrador
+	**/		
 	public static void LlamarMetodosAdmin(Admin admin, int index){	
 		Scanner leer = new Scanner(System.in);	
 		String _fechaComprado;
 		String _marca;				
+		String _color;
+		String _sku;
 		float _costo;
 		float _precioVenta;
 		//int _separadores;
@@ -82,6 +90,8 @@ public class Prueba{
 				//preguntar que articulo se agregara
 				System.out.println("Cuando se compro esta cartera? Escribir en formato dd-mm-year");
 				_fechaComprado = leer.next();
+				System.out.println("Cual es el codigo de este articulo?");
+				_sku = leer.next();
 				System.out.println("Cual fue su costo?");
 				_costo = leer.nextFloat();
 				System.out.println("Cual sera su precio de venta?");
@@ -92,62 +102,101 @@ public class Prueba{
 				_marca = leer.next();
 				System.out.println("Cuantos separadores para tarjetas/identificaciones tiene?");
 				_separadores = leer.nextInt();
-				Cartera c = new Cartera(_cantidad,_costo,_precioVenta,_separadores,_fechaComprado,true,true,true);
+				Cartera c = new Cartera(_cantidad,_costo,_precioVenta,_marca,_fechaComprado,_sku,_separadores,true,true,true);
+				System.out.println(c.toString());
 				admin.AnadirCartera(c);
 			break;
 			case 2:
-
 				System.out.println("Para agregar un reloj al inventario necesitaremos cierta informacion");
-				System.out.println("Cuando se compro esta cartera? Escribir en formato dd-mm-year");
+				//preguntar que articulo se agregara
+				System.out.println("Cuando se compro este reloj? Escribir en formato dd-mm-year");
 				_fechaComprado = leer.next();
-				System.out.println("Que marca es esta cartera?");
-				_marca = leer.next();
+				System.out.println("Cual es el codigo de este articulo?");
+				_sku = leer.next();
 				System.out.println("Cual fue su costo?");
 				_costo = leer.nextFloat();
 				System.out.println("Cual sera su precio de venta?");
 				_precioVenta = leer.nextFloat();
-				System.out.println("Cuantas de este reloj se compraron?");
-				cantidad = leer.nextInt();
-				Reloj r;
-				//admin.AnadirReloj(r);
+				System.out.println("Cuantas de esta reloj se compraron?");
+				_cantidad = leer.nextInt();
+				System.out.println("Que marca es este reloj?");
+				_marca = leer.next();
+				System.out.println("Que color es esta pulsera?");
+				_color = leer.next();
+				Reloj r = new Reloj(_cantidad,_costo,_precioVenta,_marca,_fechaComprado,_sku,_color,true);
+				admin.AnadirReloj(r);
 			break;
 			case 3:
 				System.out.println("Para agregar una gorra al inventario necesitaremos cierta informacion");
 				//preguntar que articulo se agregara
+				System.out.println("Cuando se compro esta gorra? Escribir en formato dd-mm-year");
+				_fechaComprado = leer.next();
+				System.out.println("Cual es el codigo de este articulo?");
+				_sku = leer.next();
 				System.out.println("Cual fue su costo?");
 				_costo = leer.nextFloat();
 				System.out.println("Cual sera su precio de venta?");
 				_precioVenta = leer.nextFloat();
 				System.out.println("Cuantas de esta gorra se compraron?");
-				cantidad = leer.nextInt();
-				Gorra g;
-				//admin.AnadirGorra(g);
+				_cantidad = leer.nextInt();
+				System.out.println("Que marca es esta gorra?");
+				_marca = leer.next();
+				System.out.println("Que color es esta pulsera?");
+				_color = leer.next();
+				Gorra g = new Gorra(_cantidad,_costo,_precioVenta,_marca,_fechaComprado,_sku,_color,"m");
+				admin.AnadirGorra(g);
 			break;
 			case 4:
+
 				System.out.println("Para agregar una pulsera al inventario necesitaremos cierta informacion");
 				//preguntar que articulo se agregara
+				System.out.println("Cuando se compro esta pulsera? Escribir en formato dd-mm-year");
+				_fechaComprado = leer.next();
+				System.out.println("Cual es el codigo de este articulo?");
+				_sku = leer.next();				
 				System.out.println("Cual fue su costo?");
 				_costo = leer.nextFloat();
 				System.out.println("Cual sera su precio de venta?");
 				_precioVenta = leer.nextFloat();
 				System.out.println("Cuantas de esta pulsera se compraron?");
-				cantidad = leer.nextInt();
-				Pulsera p;
-				//admin.AnadirPulsera(p);
+				_cantidad = leer.nextInt();
+				System.out.println("Que marca es esta pulsera?");
+				_marca = leer.next();
+				System.out.println("Que color es esta pulsera?");
+				_color = leer.next();
+				Pulsera p = new Pulsera(_cantidad,_costo,_precioVenta,_marca,_fechaComprado,_sku,"negra");;
+				admin.AnadirPulsera(p);
 			break;						
 			case 5:
 				System.out.println("Para declarar vendido un articulo es requerido lo siguiente:");
-				admin.SenalarVentaArticulo();
+				System.out.println("Cual es la identificacion del articulo vendido?");
+				_sku = leer.next();
+				System.out.println("Cuantos se vendieron?");
+				_cantidad = leer.nextInt();
+				admin.SenalarVentaArticulo(_sku,_cantidad);
+				System.out.println("Cuanto fue la venta total?");
+				_cantidad = leer.nextInt();
+				admin.ActualizarStatsVenta(_cantidad);
+				//admin.ventas += _cantidad;
+				//admin.ganancias = admin.ventas - admin.gasto;
+
 			break;
 			
 			case 6: 
 				System.out.println("El admin OBVIO tiene acceso al inventario");
 				admin.DesplegarInventario();
 			break;
+			case 7:
+				admin.ImprimirStats();
+			break;
 
 		}
 	}
 
+	/** Metodo para llamar a metodos de la clase user segun lo que solicite el usuario en el menu
+	 * @param user Usuario del programa
+	 * @param index Entero para identificar la opcion que solicita el usuario
+	**/		
 	public static void LlamarMetodosUser(Usuario user, int index){
 		switch(index){
 			case 1:
@@ -162,6 +211,10 @@ public class Prueba{
 			break;
 		}
 	}
+	/** Metodo para corroborar si la contrasena es correcta
+	 * @param contrasena contrasena que debe ser 
+	 * @param n contrasena introducida por el usuario
+	**/			
 	public static boolean PedirContrasena(String contrasena, String n){
 		if(n.equals(contrasena)){
 			//acceder a programa

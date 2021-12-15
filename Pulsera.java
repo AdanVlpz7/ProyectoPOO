@@ -1,4 +1,5 @@
-public class Pulsera extends Accesorio{
+import java.io.Serializable;
+public class Pulsera extends Accesorio implements java.io.Serializable{
 	protected String color;
 	protected String marca;
 
@@ -12,10 +13,14 @@ public class Pulsera extends Accesorio{
 		marca = _marca;
 	}
 
-	public Pulsera(float _costo, String _fechaComprado, String _fechaVendido, String _lugarEntrega, String _color, String _marca){
-		super(_costo,_fechaComprado,_fechaVendido,_lugarEntrega);
+	public Pulsera(int _cantidad,float _costo, float _precioVenta, String _marca,String _fechaComprado, String _sku, String _color){
+		super(_cantidad,_costo,_precioVenta,_marca,_fechaComprado,_sku);
 		color = _color;
 		marca = _marca;		
+	}
+
+	public String toString(){
+		return super.toString() + "\n{" +this.sku+"}[" + this.cantidad + "] ["+this.precioVenta +"] Pulsera  " + marca + " color: " + color;
 	}
 
 	//setters y getters

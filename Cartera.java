@@ -1,8 +1,8 @@
-public class Cartera extends Accesorio{
+import java.io.Serializable;
+public class Cartera extends Accesorio implements java.io.Serializable{
 	
 	//variables
 	protected boolean esDosCuerpos = true;
-	protected boolean esDeCierre = false;
 	protected boolean tieneCierreMonedas = false;
 	protected boolean tieneCierreBilletes = false;
 	protected int separadores = 0; //variable que distingue cuantos separadores para tarjetas o identificaciones tiene una cartera
@@ -13,25 +13,8 @@ public class Cartera extends Accesorio{
 		System.out.println("Soy una cartera sin información");
 	}
 
-	public Cartera(String _marca, int _separadores, boolean _esDosCuerpos, boolean _tieneCierreMonedas, boolean _tieneCierreBilletes){
-		this.separadores = _separadores;
-		this.marca = _marca;
-		this.esDosCuerpos = _esDosCuerpos;
-		this.tieneCierreMonedas = _tieneCierreMonedas;
-		this.tieneCierreBilletes = _tieneCierreBilletes;
-	}
-
-	public Cartera(int _cantidad, float _costo,float _precioVenta,int _separadores, String _fechaComprado, String _fechaVendido, String _lugarEntrega, String _marca, boolean _esDosCuerpos, boolean _tieneCierreMonedas, boolean _tieneCierreBilletes){
-		super(_cantidad,_costo,_precioVenta,_fechaComprado,_fechaVendido,_lugarEntrega);
-		this.marca = _marca;
-		this.separadores = _separadores;
-		this.esDosCuerpos = _esDosCuerpos;
-		this.tieneCierreMonedas = _tieneCierreMonedas;
-		this.tieneCierreBilletes = _tieneCierreBilletes;
-	}
-
-	public Cartera(int _cantidad, float _costo,String _marca,float _precioVenta,int _separadores, String _fechaComprado, String _marca, boolean _esDosCuerpos, boolean _tieneCierreMonedas, boolean _tieneCierreBilletes){
-		super(_cantidad,_costo,_marca,_precioVenta,_fechaComprado);
+	public Cartera(int _cantidad,float _costo, float _precioVenta, String _marca,String _fechaComprado,String _sku, int _separadores, boolean _esDosCuerpos, boolean _tieneCierreMonedas, boolean _tieneCierreBilletes){
+		super(_cantidad,_costo,_precioVenta,_marca,_fechaComprado,_sku);
 		this.separadores = _separadores;
 		this.esDosCuerpos = _esDosCuerpos;
 		this.tieneCierreMonedas = _tieneCierreMonedas;
@@ -40,7 +23,8 @@ public class Cartera extends Accesorio{
 
 	@Override
 	public String toString(){
-		return super.toString() + "\n Soy una cartera marca :{ " + marca + "}, de: " + ((esDosCuerpos) ? "dos cuerpos " : "tres cuerpos ");
+		return "\n{" +this.sku+"}[" + this.cantidad +"] ["+this.precioVenta +"] Cartera " + marca + " de " + ((esDosCuerpos) ? "dos cuerpos " : "tres cuerpos ") + ((tieneCierreMonedas) ? " con cierre para monedas " : " sin cierre para monedas ")
+		+ "con " + separadores + " para tarjetas y " + ((tieneEspacioFotografia) ? "con espacio para fotografia " : "sin espacio para fotografia ") + "y " + ((tieneCierreBilletes) ? "cierre para billetes" : "sin cierre para billetes");
 	}
 	//setters y getters
 	public String getMarca(){
@@ -65,14 +49,6 @@ public class Cartera extends Accesorio{
 
 	public void setSeparadores(int _separadores){
 		separadores = _separadores;
-	}
-
-	public boolean getEsDeCierre(){
-		return esDeCierre;
-	}
-
-	public void setEsDeCierre(boolean _esDeCierre){
-		esDeCierre = _esDeCierre;
 	}
 
 	public boolean getCierreMonedas(){

@@ -1,4 +1,5 @@
-public class Reloj extends Accesorio{
+import java.io.Serializable;
+public class Reloj extends Accesorio implements java.io.Serializable{
 
 	protected boolean isTouch = false;
 	protected String color;
@@ -9,17 +10,16 @@ public class Reloj extends Accesorio{
 		System.out.println("Soy un reloj!");
 	}
 
-	public Reloj(int _cantidad, float _costo,float _precioVenta,String _fechaComprado, String _marca, String _color, boolean _isTouch){
-		super(_cantidad,_costo,_precioVenta,_fechaComprado);
+	public Reloj(int _cantidad,float _costo, float _precioVenta, String _marca,String _fechaComprado, String _sku, String _color, boolean _isTouch){
+		super(_cantidad,_costo,_precioVenta,_marca,_fechaComprado,_sku);
 		this.color = _color;
 		this.isTouch = _isTouch;
 	}
 
-	public Reloj(float _costo, String _marca, String _fechaComprado, String _fechaVendido, String _lugarEntrega, String _marca, String _color, boolean _isTouch){
-		super(_costo, _marca, _fechaComprado, _fechaVendido,_lugarEntrega);
-		this.color = _color;
-		this.isTouch = _isTouch;
+	public String toString(){
+		return "\n{" +this.sku+"}[" + this.cantidad +"] ["+this.precioVenta +"] Reloj " + marca + ((isTouch) ? " touch " :  " normal ") + " color: " + color;
 	}
+
 	//setters y getters
 	public String getMarca(){
 		return marca;

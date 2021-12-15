@@ -1,4 +1,5 @@
-public class Gorra extends Accesorio{
+import java.io.Serializable;
+public class Gorra extends Accesorio implements java.io.Serializable{
 	String marca;
 	String talla;
 	String color;
@@ -12,10 +13,15 @@ public class Gorra extends Accesorio{
 		marca = _marca;
 		color = _color;
 	}
-	public Gorra(String _marca, String _color, String _talla){
+	public Gorra(int _cantidad,float _costo, float _precioVenta, String _marca,String _fechaComprado, String _sku, String _color, String _talla){
+		super(_cantidad,_costo,_precioVenta,_marca,_fechaComprado,_sku);
 		marca = _marca;
 		color = _color;
 		talla = _talla;
+	}
+
+	public String toString(){
+		return "\n{" +this.sku+"}["+  this.cantidad +"] ["+this.precioVenta +"] Gorra " + marca + " talla " + talla + "color " + color;
 	}
 
 	//setters y getters 
